@@ -18,7 +18,7 @@ function App() {
   const [sound, setSound] = useState(false)
 
   useEffect(() => {
-    
+
     scrapeToriAxios(15).then(data => {
       setItems(prev => data)
     })
@@ -48,7 +48,7 @@ function App() {
       <div className="w-[150px] h-[150px] md:w-[250px] md:h-[250px]">{image ? <img className="relative top-0 invisible md:visible" src={image ?? ""} /> : ""}</div>
       <ul className=" bg-slate-800 p-5 max-h-[50%] w-fit overflow-y-scroll overflow-x-hidden flex flex-col items-center">
         {items.length > 0 ? items.map((item, i) => (
-          <Item item={item} index={i} setImage={setImage} />
+          <Item item={item} index={i} setImage={setImage} key={i} />
         )
         ) : <h1 className="text-white font-semibold">Loading tori items..</h1>
         }
