@@ -4,6 +4,7 @@ import Item from './Item';
 import notification from "../../notification.mp3"
 import { isMobile } from 'react-device-detect';
 import Spinner from '../Spinner';
+import { Link } from 'react-router-dom';
 
 export interface ItemInfo {
     item: string
@@ -74,6 +75,7 @@ function ToriComponent() {
                 )
                 )} </ul> : <div className="absolute  w-[200px] flex justify-center mb-2"><Spinner /></div> }
             <button onClick={() => setSound(prev => !prev)} className={`${sound ? "brightness-100" : "brightness-50"} scale-150 text-white p-3`}>📢 Sound {sound ? "on" : "off"}</button>
+            <Link to={"/roulette"}>Roulette</Link>
         </>
     );
 }
