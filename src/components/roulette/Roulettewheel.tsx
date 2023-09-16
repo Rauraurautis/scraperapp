@@ -52,7 +52,7 @@ const Roulettewheel: FC<RoulettewheelProps> = ({ data, setDialog }) => {
     return (
         <div onClick={handleSpinClick} className={`${data.length > 0 ? "cursor-pointer" : ""} flex items-center justify-center `}>
             {showWinner ? <div className=" w-full h-full absolute flex justify-center items-center brightness-150 z-10 ">
-                <h1 className=" text-3xl sm:text-5xl font-semibold z-10 w-[500px]  text-center">{data[prizeNumber]?.option ?? "Pekka"}</h1>
+                <h1 className=" text-3xl sm:text-5xl font-semibold z-10 w-[500px] text-center animate-pulse-grow-shrink text-white">{data[prizeNumber]?.option ?? "Pekka"}</h1>
             </div> : ""}
             {
                 data.length === 0 ?
