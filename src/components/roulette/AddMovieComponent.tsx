@@ -11,7 +11,7 @@ const AddMovieComponent: FC<addMovieComponentProps> = ({ setData, data }) => {
     const [currentOption, setCurrentOption] = useState({ option: "" })
 
     useEffect(() => {
-        const storageMovies = JSON.parse(localStorage.getItem("movies") || "")
+        const storageMovies = JSON.parse(localStorage.getItem("movies") || "[]")
         if (Array.isArray(storageMovies)) {
             setData(prev => [...storageMovies, { option: currentOption.option }])
         }
