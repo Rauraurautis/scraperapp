@@ -22,6 +22,4 @@ export const scrapeJusaMovies = async (): Promise<Movie[]> => {
         console.error(err)
         return []
     }
-
-
 }

@@ -29,7 +29,6 @@ function ToriComponent() {
         })
     }, [])
 
-
     useEffect(() => {
         if (loading) return
 
@@ -72,7 +71,7 @@ function ToriComponent() {
                 {items.map((item, i) => (
                     <Item item={item} index={i} setHighlightedItem={setHighlightedItem} key={i} />
                 )
-                )} </ul> : <div className="absolute  w-[200px] flex justify-center mb-2"><Spinner /></div> }
+                )} </ul> : <div className="absolute  w-[200px] flex justify-center mb-2"><Spinner /></div>}
             <button onClick={() => setSound(prev => !prev)} className={`${sound ? "brightness-100" : "brightness-50"} scale-150 text-white p-3`}>📢 Sound {sound ? "on" : "off"}</button>
         </>
     );

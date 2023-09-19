@@ -2,6 +2,7 @@ import { Outlet, createBrowserRouter } from "react-router-dom"
 import ToriComponent from "../components/tori/ToriComponent";
 import ToriPage from "../pages/ToriPage";
 import RoulettePage from "../pages/RoulettePage";
+import TestPage from "../pages/TestPage";
 
 const Layout = () => {
     return (
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
             {
                 path: "/roulette",
                 element: <RoulettePage />
+            },
+            {
+                path: "/test",
+                element: <TestPage />
             }
         ]
     }
