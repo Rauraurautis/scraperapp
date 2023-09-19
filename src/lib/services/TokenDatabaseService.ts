@@ -3,7 +3,7 @@ import { TokenInput } from "../types";
 
 export const postTokenToDb = async (input: TokenInput) => {
     try {
-        const request = axios.post("http://localhost:3005/db", input)
+        const request = axios.post("https://scraper-4do1.onrender.com/db", input)
         return request
     } catch (error) {
         console.error(error)
