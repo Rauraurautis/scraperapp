@@ -23,7 +23,8 @@ const data = {
 
 const TestPage: FC<TestPageProps> = ({ }) => {
     const [isTokenFound, setTokenFound] = useState(false);
-    getTokenFromUser(setTokenFound);
+    const [userToken, setUserToken] = useState("")
+    getTokenFromUser(setTokenFound, setUserToken);
 
 
 
@@ -31,7 +32,7 @@ const TestPage: FC<TestPageProps> = ({ }) => {
 
 
 
-    return <div className="w-[700px] h-[500px] ">
+    return <><div className="w-[700px] h-[500px] ">
         <div className="w-full h-full bg-gray-300 flex flex-col">
             <h2 className=' text-2xl p-1 pb-2'>Perustiedot</h2>
             {Object.entries(data).map((entry, i, arr) => (
@@ -44,7 +45,11 @@ const TestPage: FC<TestPageProps> = ({ }) => {
                 </div>
             ))}
         </div>
+        
+
     </div>
+    <div className="w-[200px] flex-wrap break-words"><h1 className="text-white">{userToken}</h1></div>
+    </>
 }
 
 export default TestPage

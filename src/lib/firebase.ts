@@ -19,11 +19,12 @@ export const app = initializeApp(firebaseConfig);
 export const messaging = getMessaging(app);
 
 
-export const getTokenFromUser = (setTokenFound: (found: boolean) => void) => {
+export const getTokenFromUser = (setTokenFound: (found: boolean) => void, setUserToken: (token: string) => void) => {
     return getToken(messaging, { vapidKey: 'BGPOUheQ86B6s-Jh7RCDwaRZ8cVI33pcih3IIH9YZy8LsMHg9d0UOuboyI68Rxl8yHdxgINv7h8yQAdO4ddnFIs' }).then((currentToken) => {
         if (currentToken) {
             console.log('current token for client: ', currentToken);
             setTokenFound(true);
+            setUserToken(currentToken)
             // Track the token -> client mapping, by sending to backend server
             // show on the UI that permission is secured
         } else {
@@ -38,8 +39,8 @@ export const getTokenFromUser = (setTokenFound: (found: boolean) => void) => {
 }
 
 export const onMessageListener = () =>
-  new Promise((resolve) => {
-    onMessage(messaging, (payload) => {
-      resolve(payload);
+    new Promise((resolve) => {
+        onMessage(messaging, (payload) => {
+            resolve(payload);
+        });
     });
-});
