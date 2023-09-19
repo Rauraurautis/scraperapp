@@ -24,7 +24,7 @@ const data = {
 const TestPage: FC<TestPageProps> = ({ }) => {
     const [isTokenFound, setTokenFound] = useState(false);
     const [userToken, setUserToken] = useState("")
-    getTokenFromUser(setTokenFound, setUserToken);
+    getTokenFromUser();
 
 
 

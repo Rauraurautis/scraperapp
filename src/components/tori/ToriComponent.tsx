@@ -4,6 +4,7 @@ import Item from './Item';
 import notification from "../../notification.mp3"
 import { isMobile } from 'react-device-detect';
 import Spinner from '../Spinner';
+import { getTokenFromUser } from '../../lib/firebase';
 
 export interface ItemInfo {
     item: string
@@ -20,7 +21,10 @@ function ToriComponent() {
     const [loading, setLoading] = useState(false)
     const [sound, setSound] = useState(false)
 
+
+
     useEffect(() => {
+        getTokenFromUser()
         setLoading(true)
         scrapeToriAxios(15).then(data => {
             data = data.map((data) => { return { ...data, color: "white " } })
