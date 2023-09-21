@@ -23,7 +23,6 @@ export const messaging = getMessaging(app);
 export const getTokenFromUser = async () => {
     return getToken(messaging, { vapidKey: 'BGPOUheQ86B6s-Jh7RCDwaRZ8cVI33pcih3IIH9YZy8LsMHg9d0UOuboyI68Rxl8yHdxgINv7h8yQAdO4ddnFIs' }).then((currentToken) => {
         if (currentToken) {
-            console.log('current token for client: ', currentToken);
             postTokenToDb({ token: currentToken, userAgent: navigator.userAgent }).then(res => console.log("Succesfully sent token to Firebase")).catch(error => console.error(error))
 
         } else {

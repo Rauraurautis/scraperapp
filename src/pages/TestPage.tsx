@@ -1,6 +1,7 @@
 import { FC, useState } from 'react'
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import { getTokenFromUser, messaging } from '../lib/firebase';
+import { Link, useSearchParams } from 'react-router-dom';
 
 interface TestPageProps {
 
@@ -22,12 +23,11 @@ const data = {
 }
 
 const TestPage: FC<TestPageProps> = ({ }) => {
-    const [isTokenFound, setTokenFound] = useState(false);
-    const [userToken, setUserToken] = useState("")
-    getTokenFromUser();
 
-
-
+    const [searchParams, setSearchParams] = useSearchParams({ q: "", something: "" })
+    const q = searchParams.get("q")
+    const onlyComputerItems = searchParams.get("onlyComputerItems") === "true"
+    console.log(process.env.NODE_ENV)
 
 
 
@@ -45,10 +45,18 @@ const TestPage: FC<TestPageProps> = ({ }) => {
                 </div>
             ))}
         </div>
-        
+        <input type="text" name="something" onChange={e => setSearchParams(prev => {
+            prev.set("q", e.target.value)
+            return prev
+        }, { replace: true })}
+            value={q || ""} />
+        <input type="checkbox" checked={onlyComputerItems} name="onlyComputerItems" onChange={e => setSearchParams(prev => {
+            prev.set("onlyComputerItems", e.target.checked + "")
+            return prev
+        }, { replace: true })} />
+        <Link to="/"><p>front a</p></Link>
 
     </div>
-    <div className="w-[200px] flex-wrap break-words"><h1 className="text-white">{userToken}</h1></div>
     </>
 }
 
