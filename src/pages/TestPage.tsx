@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import { getTokenFromUser, messaging } from '../lib/firebase';
 import { Link, useSearchParams } from 'react-router-dom';
@@ -27,7 +27,25 @@ const TestPage: FC<TestPageProps> = ({ }) => {
     const [searchParams, setSearchParams] = useSearchParams({ q: "", something: "" })
     const q = searchParams.get("q")
     const onlyComputerItems = searchParams.get("onlyComputerItems") === "true"
-    console.log(process.env.NODE_ENV)
+    
+    useEffect(() => {
+        const eventSource = new EventSource("http://localhost:3005/test")
+
+        eventSource.addEventListener('message', (event) => {
+            const newData = JSON.parse(event.data);
+            console.log(newData)
+          });
+      
+          eventSource.addEventListener('error', (error) => {
+            console.error('SSE error:', error);
+            eventSource.close();
+          });
+      
+          return () => {
+            eventSource.close();
+          };
+        }, []);
+
 
 
 
