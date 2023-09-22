@@ -5,6 +5,7 @@ import notification from "../../notification.mp3"
 import { isMobile } from 'react-device-detect';
 import Spinner from '../Spinner';
 import { getTokenFromUser } from '../../lib/firebase';
+import axios from 'axios';
 
 export interface ItemInfo {
     item: string
@@ -42,8 +43,14 @@ function ToriComponent() {
             console.log("Connection closed")
         })
 
+        const serverHealthCheck = setInterval(() => {
+            axios.get(`${process.env.NODE_ENV === "development" ? "http://localhost:3005/annetaan" : "https://scraper-4do1.onrender.com/annetaan"}`).then(data => {
+                if (data) console.log("Server is up and running!")
+            }).catch(error => { console.error(`Error connecting to the server: ${error.message}`) })
+        }, 60000)
+
         return () => {
-            console.log("closing")
+            clearInterval(serverHealthCheck)
             eventSource.close();
         };
     }, []);
