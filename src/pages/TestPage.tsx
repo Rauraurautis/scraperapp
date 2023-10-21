@@ -30,7 +30,7 @@ const TestPage: FC<TestPageProps> = ({ }) => {
     const onlyComputerItems = searchParams.get("onlyComputerItems") === "true"
 
     useEffect(() => {
-        axios.get("http://scraper-4do1.onrender.com/healthcheck", { withCredentials: true })
+        axios.get("https://scraper-4do1.onrender.com/healthcheck", { withCredentials: true })
     }, [])
 
     const getBackCookieInfo = async () => {
