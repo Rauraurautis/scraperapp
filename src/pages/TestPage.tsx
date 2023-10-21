@@ -34,7 +34,7 @@ const TestPage: FC<TestPageProps> = ({ }) => {
     }, [])
 
     const getBackCookieInfo = async () => {
-        axios.get("https://scraper-4do1.onrender.com/healthcheck", { withCredentials: true }).then(res => console.log(res.data))
+        axios.get("https://scraper-4do1.onrender.com/cookies", { withCredentials: true }).then(res => console.log(res.data))
     }
 
 
