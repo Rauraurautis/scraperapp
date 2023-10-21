@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from 'react'
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import { getTokenFromUser, messaging } from '../lib/firebase';
 import { Link, useSearchParams } from 'react-router-dom';
+import axios from 'axios';
 
 interface TestPageProps {
 
@@ -27,30 +28,18 @@ const TestPage: FC<TestPageProps> = ({ }) => {
     const [searchParams, setSearchParams] = useSearchParams({ q: "", something: "" })
     const q = searchParams.get("q")
     const onlyComputerItems = searchParams.get("onlyComputerItems") === "true"
-    
+
     useEffect(() => {
-        const eventSource = new EventSource("http://localhost:3005/test")
+        axios.get("https://scraper-4do1.onrender.com/healthcheck", { withCredentials: true })
+    }, [])
 
-        eventSource.addEventListener('message', (event) => {
-            const newData = JSON.parse(event.data);
-            console.log(newData)
-          });
-      
-          eventSource.addEventListener('error', (error) => {
-            console.error('SSE error:', error);
-            eventSource.close();
-          });
-      
-          return () => {
-            eventSource.close();
-          };
-        }, []);
-
-
-
+    const getBackCookieInfo = async () => {
+        axios.get("https://scraper-4do1.onrender.com/healthcheck", { withCredentials: true }).then(res => console.log(res.data))
+    }
 
 
     return <><div className="w-[700px] h-[500px] ">
+        <button onClick={getBackCookieInfo} className="p-5 bg-slate-400">Press here</button>
         <div className="w-full h-full bg-gray-300 flex flex-col">
             <h2 className=' text-2xl p-1 pb-2'>Perustiedot</h2>
             {Object.entries(data).map((entry, i, arr) => (
