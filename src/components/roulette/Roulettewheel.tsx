@@ -23,7 +23,7 @@ const randomBackgrounds = () => {
 const Roulettewheel: FC<RoulettewheelProps> = ({ data, setDialog }) => {
     const [mustSpin, setMustSpin] = useState(false);
     const [prizeNumber, setPrizeNumber] = useState(() => { return randomNumber(data.length) });
-    const [showWinner, setShowWinner] = useState(true)
+    const [showWinner, setShowWinner] = useState(false)
 
     const bgColors = useMemo(() => {
         return randomBackgrounds()
