@@ -8,7 +8,7 @@ function App() {
 
 
   return (
-    <div>
+    <div className="overflow-clip">
       <RouterProvider router={router} />
     </div>
   );

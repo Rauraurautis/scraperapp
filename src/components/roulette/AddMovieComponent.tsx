@@ -20,9 +20,9 @@ const AddMovieComponent: FC<addMovieComponentProps> = ({ setData, data }) => {
     }, [option])
 
     const addMovie = () => {
-        const validation = movieSchema.safeParse(option)
+        const validation = movieSchema.safeParse({ option: option })
         if (validation.success) {
-            window.localStorage.setItem("movies", JSON.stringify([...data.slice(0, data.length - 1), option]))
+            window.localStorage.setItem("movies", JSON.stringify([...data.slice(0, data.length - 1), { option: option.length > 17 ? option.slice(0, 17) + "..." : option, fullName: option }]))
             setSearchParams(prev => {
                 prev.set("option", "")
                 return prev

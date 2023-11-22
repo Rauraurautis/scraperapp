@@ -20,9 +20,9 @@ const Wheel: FC = ({ }) => {
         const storageMovies = localStorage.getItem("movies") || "[]"
         const movies: Movie[] = JSON.parse(storageMovies)
         if (movies) {
-            movies.length === 0 ? setData(prev => [{ option: "" }]) : setData(prev => movies)
+            movies.length === 0 ? setData(prev => [{ option: "", fullName: "" }]) : setData(prev => movies)
         } else {
-            setData(prev => [...prev, { option: "" }])
+            setData(prev => [...prev, { option: "", fullName: "" }])
         }
     }, [])
 
@@ -42,8 +42,12 @@ const Wheel: FC = ({ }) => {
             setLoading(true)
             scrapeJusaMovies().then(data => {
                 setLoading(false)
-                setData(data)
-                localStorage.setItem("movies", JSON.stringify(data))
+                const mapped = data.map(entry => {
+                    if (entry.option.length > 17) return { option: entry.option.slice(0, 17) + "...", fullName: entry.option }
+                    return { ...entry, fullName: entry.option }
+                })
+                setData(mapped)
+                localStorage.setItem("movies", JSON.stringify(mapped))
             })
 
         } catch (error) {

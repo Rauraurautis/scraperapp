@@ -8,10 +8,10 @@ module.exports = {
       keyframes: {
         'grow-shrink': {
           '0%, 100%': {
-            'font-size': '3rem',
+            'transform': 'scale(1)',
           },
           '50%': {
-            'font-size': '5rem',
+            'transform': 'scale(1.5)',
           },
         },
       },

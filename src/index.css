@@ -16,3 +16,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.mule {
+  width: 100px;
+  height: 100px;
+  background: none;
+  position: absolute;
+  background-image: url("https://icons.veryicon.com/png/o/application/awesome-common-free-open-source-icon/sticker-mule.png");
+  background-size: contain;
+}
+
+@keyframes dropDown {
+  0% {transform: translateY(0) rotate(0deg); opacity: 1}
+  100% {transform: translateY(750px) rotate(360deg); opacity: 0}
+}
+
+@keyframes dropDownReverse {
+  0% {transform: translateY(0) rotate(0deg); opacity: 1}
+  100% {transform: translateY(750px) rotate(-360deg); opacity: 0.25}
+}
