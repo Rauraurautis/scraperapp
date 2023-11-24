@@ -23,3 +23,13 @@ export const scrapeJusaMovies = async (): Promise<Movie[]> => {
         return []
     }
 }
+
+export const scrapeJusaChristmasMovies = async (): Promise<Movie[]> => {
+    try {
+        const { data } = await axios.get("https://scraper-4do1.onrender.com/jusachristmas")
+        return data
+    } catch (err) {
+        console.error(err)
+        return []
+    }
+}

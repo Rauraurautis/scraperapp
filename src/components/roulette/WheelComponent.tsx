@@ -1,6 +1,6 @@
 "use client"
 import { Movie } from '../../lib/types';
-import { scrapeJusaMovies } from '../../lib/utils/scraper';
+import { scrapeJusaChristmasMovies, scrapeJusaMovies } from '../../lib/utils/scraper';
 import { FC, useEffect, useState } from 'react'
 import AddMovieComponent from './AddMovieComponent';
 import Roulettewheel from './Roulettewheel';
@@ -55,6 +55,25 @@ const Wheel: FC = ({ }) => {
         }
     }
 
+    const getJusaChristmasMovies = () => {
+        try {
+            setLoading(true)
+            scrapeJusaChristmasMovies().then(data => {
+                setLoading(false)
+                const mapped = data.map(entry => {
+                    if (entry.option.length > 17) return { option: entry.option.slice(0, 17) + "...", fullName: entry.option }
+                    return { ...entry, fullName: entry.option }
+                })
+                setData(mapped)
+                localStorage.setItem("movies", JSON.stringify(mapped))
+            })
+
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+
     if (loading) {
         return <div className="w-[400px] flex mt-5 items-center justify-center min-h-[550px]">
             <Spinner />
@@ -66,6 +85,7 @@ const Wheel: FC = ({ }) => {
         {dialog ? <><Roulettewheel data={data} setDialog={setDialog} /><AddMovieComponent setData={setData} data={data} /></> :
             <div className="flex justify-between mt-5 w-full px-5 sm:px-0">
                 <button className="p-3 bg-blue-700 rounded-xl hover:scale-110 transition-all" onClick={getJusaMovies}>Letterboxd</button>
+                <button className="p-3 bg-blue-700 rounded-xl hover:scale-110 transition-all" onClick={getJusaChristmasMovies}>X-mas Letterboxd</button>
                 <button className="p-3 bg-blue-700 rounded-xl hover:scale-110 transition-all" onClick={() => setDialog(true)}>Lisää vaihtoehtoja</button>
             </div>}
     </div>
